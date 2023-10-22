@@ -2,15 +2,15 @@ import Responses
 from Responses import chatbot
 import CheckOpinion
 from CheckOpinion import initRequest
-from CheckOpinion import CheckLowestPrice
+from CheckOpinion import LowestPrice
 from CheckOpinion import Find
+from CheckOpinion import BestRated
 
 
 if __name__ == "__main__":
 
     #chatbot()
-    item = "iphone"
+    item = "olej"
     URL = initRequest(item)
     tab = Find(URL)
-    print(tab)
-    CheckLowestPrice(tab)
+    LowestPrice(tab)
