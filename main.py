@@ -10,7 +10,8 @@ from CheckOpinion import BestRated
 if __name__ == "__main__":
 
     #chatbot()
-    item = "olej"
+    item = "lalka"
     URL = initRequest(item)
     tab = Find(URL)
-    LowestPrice(tab)
+    #LowestPrice(tab)
+    BestRated(tab)
