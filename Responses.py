@@ -4,59 +4,28 @@ from CheckOpinion import initRequest
 from CheckOpinion import LowestPrice
 from CheckOpinion import Find
 from CheckOpinion import BestRated
-import threading
 
-pairs = [
-    [
-        r"Sprawdź (.*)",
-        ["Już sprawdzam, daj mi chwilę..."]
-
-    ],
-    [
-        r"witaj|cześć|hej",
-        ["Cześć!"]
-    ],
-    [
-        r"jak się masz?",
-        ["Dobrze, dziękuję! Jak mogę ci dzisiaj pomóc?"]
-    ],
-    [
-        r".*",
-        ["Przepraszam, nie rozumiem Cię."]
-    ],
-    [
-        r"co możesz zrobić",
-        ["Jestem prostym chatbotem i mogę pomóc Ci znaleźć . Spróbuj zapytać o coś!"]
-    ],
-    [
-        r"zamówienie|kupić|produkt",
-        ["Przepraszam, ale jestem tylko chatbotem i nie mogę dokonywać zakupów. Jednak mogę ci doradzić w wyborze produktu."]
-    ],
-    [
-        r"jak mogę cię kontaktować",
-        ["Jestem dostępny tutaj przez ten chat. Jak mogę ci pomóc?"]
-    ],
-    [
-        r"do widzenia",
-        ["Do widzenia! Miłego dnia!"]
-    ],
-]
 
 # Ustawienia rozpoznawania
-def chatbot():
-    user_input = ""  # Inicjalizacja zmiennej do przechowywania wpisanego słowa
-    print("Witaj! Jestem twój chatbot. Jaki produkt mam dla Ciebie sprawdzić?")
-    chat = Chat(pairs, reflections)
+def chatbot(counter):
 
-    chat.converse()
+    if counter == 0:
+        print("Hi! How can I help you?")
+    else:
+        print("What else can I do for you?")
 
-    while True:
-        user_message = input("> ")
-        user_input_match = reflections.match(r"Sprawdź (.*)", user_message)
-        if user_input_match:
-            print("ok")
-            user_input = user_input_match.group(1)
-            URL = initRequest(user_input)
+
+    user_input = input("> ")
+
+    if "Check" in user_input:
+        parts = user_input.split("Check ", 1)
+        if len(parts) == 2:
+            second_part = parts[1]
+            URL = initRequest(second_part)
             find = Find(URL)
             # LowestPrice(tab)
             BestRated(find)
+        else:
+            print("I'm sorry, the message format is incorrect. Please insert your message in this format: Check {something}")
+    else:
+        print("I'm sorry, I can't help you with that. Please insert your message in this format: Check {something}")
