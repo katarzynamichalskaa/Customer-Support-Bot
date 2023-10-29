@@ -1,10 +1,10 @@
 import Responses
-from Responses import chatbot
+from Responses import ChatBot
 
 counter = 0
+chatBot = ChatBot()
 
 if __name__ == "__main__":
-
     while True:
-        chatbot(counter)
+        chatBot.start_conversation(counter)
         counter = counter + 1
